@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head><meta property="og:image" content="https://your-domain.com/background.png">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>LC ROLEPLAY</title>
+<link rel="icon" type="image/png" href="hero.png">
+
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Cairo',sans-serif;
+scroll-behavior:smooth;
+}
+
+body{
+background:#050505;
+color:white;
+overflow-x:hidden;
+}
+
+/* الخلفية */
+
+```css
+.bg{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-image: url("hero.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: -2;
+}
+```
+
+.bg::after{
+content:'';
+position:absolute;
+width:100%;
+height:100%;
+background-image:
+linear-gradient(rgba(255,0,0,0.05) 1px, transparent 1px),
+linear-gradient(90deg, rgba(255,0,0,0.05) 1px, transparent 1px);
+background-size:40px 40px;
+}
+
+/* الناف بار */
+
+.navbar{
+width:100%;
+display:flex;
+justify-content:center;
+align-items:center;
+gap:45px;
+padding:22px 40px;
+background:rgba(0,0,0,.90);
+backdrop-filter:blur(10px);
+border-bottom:1px solid rgba(255,0,0,.2);
+position:sticky;
+top:0;
+z-index:9999;
+}
+
+.nav-link{
+color:#cfcfcf;
+text-decoration:none;
+font-size:18px;
+transition:.3s;
+position:relative;
+padding-bottom:8px;
+}
+
+.nav-link:hover{
+color:#ff0000;
+}
+
+.nav-link::after{
+content:'';
+position:absolute;
+right:0;
+bottom:0;
+width:0%;
+height:2px;
+background:#ff0000;
+transition:.3s;
+}
+
+.nav-link:hover::after{
+width:100%;
+}
+
+.nav-link.active{
+color:#ff8800;
+font-weight:700;
+}
+
+@media(max-width:900px){
+
+.navbar{
+gap:20px;
+overflow-x:auto;
+justify-content:flex-start;
+}
+
+.navbar::-webkit-scrollbar{
+display:none;
+}
+
+.nav-link{
+white-space:nowrap;
+}
+
+}
+
+/* الهيدر */
+
+.hero{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+padding:20px;
+position:relative;
+}
+
+.hero-content{
+max-width:900px;
+}
+
+.logo{
+font-size:130px;
+font-weight:900;
+color:#ff0000;
+letter-spacing:10px;
+text-shadow:
+0 0 15px #ff0000,
+0 0 45px #ff0000;
+}
+
+.hero h1{
+font-size:65px;
+margin-top:10px;
+}
+
+.hero p{
+margin-top:18px;
+color:#c7c7c7;
+line-height:2;
+font-size:20px;
+}
+
+/* الأزرار */
+
+.buttons{
+margin-top:45px;
+display:flex;
+gap:20px;
+justify-content:center;
+flex-wrap:wrap;
+}
+
+.btn{
+padding:16px 45px;
+border:none;
+border-radius:14px;
+cursor:pointer;
+text-decoration:none;
+font-size:18px;
+font-weight:700;
+transition:.3s;
+}
+
+.btn-red{
+background:#ff0000;
+color:white;
+box-shadow:0 0 20px rgba(255,0,0,.5);
+}
+
+.btn-red:hover{
+transform:translateY(-5px);
+box-shadow:0 0 35px rgba(255,0,0,.8);
+}
+
+.btn-dark{
+background:#151515;
+color:white;
+border:1px solid #333;
+}
+
+.btn-dark:hover{
+background:#222;
+}
+
+/* الأقسام */
+
+.section{
+padding:100px 8%;
+}
+
+.section-title{
+font-size:50px;
+text-align:center;
+margin-bottom:50px;
+color:#ff0000;
+text-shadow:0 0 15px rgba(255,0,0,.5);
+}
+
+/* القائمة الحمراء */
+
+.gang-container{
+max-width:700px;
+margin:auto;
+text-align:center;
+}
+
+.gang-btn{
+width:100%;
+padding:24px;
+border:none;
+border-radius:22px;
+background:#ff0000;
+color:white;
+font-size:32px;
+font-weight:900;
+cursor:pointer;
+transition:.3s;
+box-shadow:
+0 0 0 2px white,
+0 0 25px rgba(255,0,0,.6);
+}
+
+.gang-btn:hover{
+transform:scale(1.02);
+box-shadow:
+0 0 0 2px white,
+0 0 45px rgba(255,0,0,.9);
+}
+
+.gang-menu{
+display:none;
+margin-top:25px;
+animation:fade .4s ease;
+}
+
+.gang-menu.active{
+display:block;
+}
+
+.gang-item{
+background:#111;
+border:1px solid rgba(255,0,0,.2);
+padding:20px;
+margin-bottom:14px;
+border-radius:16px;
+font-size:22px;
+transition:.3s;
+}
+
+.gang-item:hover{
+background:#ff0000;
+transform:translateY(-4px);
+}
+
+/* القوانين */
+
+.rules{
+display:grid;
+gap:20px;
+}
+
+.rule-box{
+background:#111;
+border-right:5px solid #ff0000;
+border-radius:16px;
+overflow:hidden;
+}
+
+.rule-title{
+padding:22px;
+cursor:pointer;
+font-size:20px;
+transition:.3s;
+}
+
+.rule-title:hover{
+background:#191919;
+}
+
+.rule-content{
+max-height:0;
+overflow:hidden;
+transition:.4s;
+background:#0d0d0d;
+}
+
+.rule-content p{
+padding:20px;
+color:#bbb;
+line-height:2;
+}
+
+/* الفوتر */
+
+footer{
+padding:40px;
+text-align:center;
+color:#777;
+border-top:1px solid rgba(255,255,255,.1);
+}
+
+.red-circle{
+position:absolute;
+width:500px;
+height:500px;
+border:2px solid rgba(255,0,0,.12);
+border-radius:50%;
+bottom:-250px;
+left:-250px;
+}
+
+@keyframes fade{
+
+from{
+opacity:0;
+transform:translateY(-10px);
+}
+
+to{
+opacity:1;
+transform:translateY(0);
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="bg"></div>
+
+<!-- الناف بار -->
+
+<nav class="navbar">
+
+<a href="#home" class="nav-link active">الرئيسية</a>
+
+<a href="#gangs" class="nav-link">العصابات</a>
+
+<a href="#jobs" class="nav-link">الوظائف</a>
+
+<a href="#store" class="nav-link">المتجر</a>
+
+<a href="#rules" class="nav-link">القوانين</a>
+
+</nav>
+
+<!-- الرئيسية -->
+
+<section class="hero" id="home">
+
+<div class="red-circle"></div>
+
+<div class="hero-content">
+
+<div class="logo">LC</div>
+
+<h1>𝐋𝐂 𝐑𝐎𝐋𝐄𝐏𝐋𝐀𝐘</h1>
+
+<p>
+أفضل سيرفر رول بلاي بعالم العصابات والشرطة والقوات الخاصة
+عيش تجربة واقعية كاملة بقوانين قوية وأنظمة احترافية
+</p>
+
+<div class="buttons">
+
+<a href="https://discord.gg/SrrVyTjy2"
+target="_blank"
+class="btn btn-red">
+الديسكورد
+</a>
+<a href="#" class="btn btn-red">
+  ⬇️ لظهور القائمات 
+</a>
+</div>
+
+</div>
+
+</section>
+
+<!-- العصابات -->
+
+<section class="section" id="gangs">
+
+<h2 class="section-title">العصابات</h2>
+
+<div class="gang-container">
+
+<button class="gang-btn" onclick="toggleBox('gangMenu')">
+☰ عرض العصابات
+</button>
+
+<div class="gang-menu" id="gangMenu">
+
+<div class="gang-item">Scrap 🔴</div>
+<div class="gang-item">North side🔴</div>
+<div class="gang-item">Trickster🔴</div>
+<div class="gang-item">Familia🔴</div>
+<div class="gang-item">Soa🔴</div>
+<div class="gang-item">AL-Mando🔴</div>
+<div class="gang-item">26Yard🔴</div>
+<div class="gang-item">Vagos🔴</div>
+<div class="gang-item">Ms13🔴</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- الوظائف -->
+
+<section class="section" id="jobs">
+
+<h2 class="section-title">الوظائف الرسمية</h2>
+
+<div class="gang-container">
+
+<button class="gang-btn" onclick="toggleBox('jobsMenu')">
+☰ عرض الوظائف
+</button>
+
+<div class="gang-menu" id="jobsMenu">
+
+<div class="gang-container">
+
+  <!-- الشرطة -->
+  <div class="gang-section">
+    <div class="section-title-mini">Police</div>
+
+    <div class="gang-item">Police Department</div>
+
+    <div class="gang-sub">
+      <div class="gang-item">S.S.F - فرقة المداهمات الخاصة</div>
+            <div class="gang-item">S.O.C - فرقة النخبة الامنيه</div>
+      <div class="gang-item">S.W.A.T - التدخل السريع</div>
+    </div>
+  </div>
+
+  <!-- القضاء -->
+  <div class="gang-section">
+    <div class="section-title-mini">𝐉𝐮𝐬𝐭𝐢𝐜𝐞</div>
+
+    <div class="gang-item">Justice Department</div>
+  </div>
+
+  <!-- الإسعاف -->
+  <div class="gang-section">
+    <div class="section-title-mini">EMS</div>
+
+    <div class="gang-item">E.M.S Medical Services</div>
+  </div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+</div>
+
+</div>
+
+```html
+</section>
+<!-- المتجر -->
+
+<section class="section" id="store">
+
+    <h2 class="section-title">المتجر</h2>
+
+    <div class="gang-container">
+
+        <button class="gang-btn" onclick="toggleBox('storeMenu')">
+            ☰ عرض المتجر
+        </button>
+
+        <div class="gang-menu" id="storeMenu">
+
+            <!-- صورة المتجر -->
+            <img src="bg.png" alt="صورة المتجر" width="300">
+
+            <div class="gang-item">VIP</div>
+            <div class="gang-item">Cars</div>
+            <div class="gang-item">Coins</div>
+
+
+</div>
+
+</div>
+
+</section>
+
+<!-- القوانين -->
+
+<section class="section" id="rules">
+
+<h2 class="section-title">القوانين</h2>
+
+<div class="rules">
+
+<div class="rule-box">
+
+<div class="rule-title" onclick="toggleRule(this)">
+🚫𝖱ules
+</div>
+
+<div class="rule-content">
+<p>
+⫸يجب التمثيل بالشخصية وعدم التحدث أو التصرف بمعلومات من خارج اللعبة
+
+⫸يجب الحفاظ على حياة الشخصية والتصرف بشكل منطقي عند التعرض للخطر
+
+⫸ يمنع القتل أو الاعتداء على الآخرين دون سبب مقنع داخل مجريات اللعب
+
+⫸ يمنع استخدام المركبات لإيذاء اللاعبين بشكل متعمد
+
+⫸يمنع إجبار اللاعبين على تنفيذ أفعال غير منطقية أو مستحيلة
+
+⫸يمنع استغلال أخطاء اللعبة أو الثغرات لتحقيق أي مكسب
+
+⫸ يمنع الانسحاب من اللعبة أثناء الأحداث الجارية
+
+⫸ يجب إعطاء جميع الأطراف فرصة كافية لأداء أدوارهم أثناء الأحداث
+
+⫸يمنع العودة للانتقام أو استكمال الحدث بعد وفاة الشخصية إذا انتهى دورها فيه
+
+⫸ يمنع الإزعاج المتعمد أو التخريب على اللاعبين
+
+⫸ يجب احترام الإدارة والالتزام بتوجيهاتها
+
+⫸ الاحترام المتبادل بين جميع اللاعبين إلزامي في جميع الأوقات
+
+⫸ يمنع تقمص شخصيات غير واقعية أو خارجة للواقعيه
+
+⫸ يمنع استخدام معلومات حصلت عليها من خارج مجريات الشخصية
+
+⫸  يمنع افتعال المواقف أو التواجد المستمر في مواقع بغرض اللقافه 
+
+للتنويه: يجب احترام مجريات الرول بلاي وعدم أقحام الشخصيه في احداث لاتخصك 
+⫸ للإدارة الحق في اتخاذ العقوبة المناسبة لأي مخالفة غير منصوص عليها
+
+⫸ 17 ملاحظه هامه: قابل للتعديل والزياده 
+</p>
+</div>
+
+</div>
+
+<div class="rule-box">
+
+<div class="rule-title" onclick="toggleRule(this)">
+🎙️ قوانين الصوت
+</div>
+
+<div class="rule-content">
+<p>
+يمنع استخدام أي برامج تضخيم صوت أو برامج اخرى 
+والعقوبه باند نهائي.
+</p>
+</div>
+
+</div>
+
+<div class="rule-box">
+
+<div class="rule-title" onclick="toggleRule(this)">
+⚠️ قوانين الاحترام
+</div>
+
+<div class="rule-content">
+<p>
+احترام الإدارة واللاعبين إلزامي.
+</p>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<footer>
+LC ROLEPLAY © 2026
+</footer>
+
+<script>
+
+function toggleBox(id){
+
+document
+.getElementById(id)
+.classList.toggle("active");
+
+}
+
+function toggleRule(element){
+
+let content = element.nextElementSibling;
+
+if(content.style.maxHeight){
+content.style.maxHeight = null;
+}else{
+content.style.maxHeight = content.scrollHeight + "px";
+}
+
+}
+
+</script>
+
+</body>
+</html>
